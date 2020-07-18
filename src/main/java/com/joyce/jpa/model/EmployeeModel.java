@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "employee")
-public class Employee{
+public class EmployeeModel extends BaseModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class Employee{
         return email;
     }
 
-    public Employee setEmail(String email) {
+    public EmployeeModel setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -45,7 +45,7 @@ public class Employee{
         return id;
     }
 
-    public Employee setId(Integer id) {
+    public EmployeeModel setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -54,7 +54,7 @@ public class Employee{
         return username;
     }
 
-    public Employee setUsername(String username) {
+    public EmployeeModel setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -63,7 +63,7 @@ public class Employee{
         return remark;
     }
 
-    public Employee setRemark(String remark) {
+    public EmployeeModel setRemark(String remark) {
         this.remark = remark;
         return this;
     }
