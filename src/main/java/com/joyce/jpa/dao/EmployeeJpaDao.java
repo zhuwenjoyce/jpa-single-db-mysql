@@ -26,7 +26,7 @@ public interface EmployeeJpaDao extends JpaRepository<EmployeeModel,Integer> {
     Page<EmployeeModel> listEmployeeById(@Param("id") Integer id, Pageable pageable);
 
     // 这个代码可用，查询指定字段
-    @Query(value = "select create_user createUser, username from employee", nativeQuery = true)
+    @Query(value = "select create_user createUser, username from employee limit 2", nativeQuery = true)
     List<Map<String,Object>> onlyReturnTwoFields();
 
 }
