@@ -66,4 +66,13 @@ public class ABController {
         return map;
     }
 
+    @RequestMapping("/case6")
+    public Map<String, Object> testCse6(String username) {
+        aService.saveAandB_case6(username);
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("time", LocalDateTime.now());
+        return map;
+    }
+
 }

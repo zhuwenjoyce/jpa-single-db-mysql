@@ -6,6 +6,7 @@ import com.joyce.jpa.model.AModel;
 import com.joyce.jpa.model.BModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -100,6 +101,32 @@ public class AService {
         a.setUsername(username);
         aDao.save(a);
         int i = 1/0;
+        BModel b = new BModel();
+        b.setUsername(username);
+        bDao.save(b);
+    }
+
+    /**
+     * DB事务测试，a 和 b 都不能成功保存！
+     * 证明事务在一个类里面方法内部调用其他方法，事务是成功的。
+     */
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void saveAandB_case6(String username) {
+        for (int i = 1; i < 5; i++) {
+            String name = username + "-case6-" + i;
+            business_a_and_b_for_case6(name, i);
+        }
+    }
+
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void business_a_and_b_for_case6(String username, int i){
+        AModel a = new AModel();
+        a.setUsername(username);
+        aDao.save(a);
+
+        if( i > 3 ) {
+            int q = 1/0;
+        }
         BModel b = new BModel();
         b.setUsername(username);
         bDao.save(b);
