@@ -45,7 +45,7 @@ public class UserJpaService {
                 .createDateTime(ZonedDateTime.now())
                 .build();
         UserModel userModel2 = userJpaDao.save(user2);
-        long id2 = userModel2.getUserId();
+//        long id2 = userModel2.getUserId();
     }
 
 }
