@@ -28,9 +28,22 @@ public class StressTestingController {
 
     @RequestMapping("/stress-testing/demo/1")
     @ResponseBody
-    public Map<String, String> 模拟正常业务(String email, String username ) {
-        userJpaService.DB事务压测();
+    public Map<String, String> stressTesting1() {
+        userJpaService.stressTesting1();
         return map;
+    }
+
+    @RequestMapping("/stress-testing/demo/2")
+    @ResponseBody
+    public Map<String, String> stressTesting2() throws InterruptedException {
+        Thread.sleep(50L);
+        return map;
+    }
+
+    @RequestMapping("/stress-testing/demo/3")
+    @ResponseBody
+    public Map<String, String> stressTesting3() throws InterruptedException {
+        return userJpaService.stressTesting2();
     }
 
 }

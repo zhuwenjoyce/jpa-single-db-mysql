@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: Joyce Zhu
@@ -26,7 +29,7 @@ public class UserJpaService {
     private Random random = new Random();
 
     @Transactional // (value = "transactionManager")
-    public void DB事务压测(){
+    public void stressTesting1(){
         UserModel user = UserModel.builder()
                 .age(random.nextInt(10))
                 .username(UUID.randomUUID().toString())
@@ -48,4 +51,14 @@ public class UserJpaService {
 //        long id2 = userModel2.getUserId();
     }
 
+    public Map<String, String> stressTesting2() {
+        Map<String, String> map = new HashMap<>();
+        map.put("result", "success");
+        try {
+            TimeUnit.MILLISECONDS.sleep(5L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
 }

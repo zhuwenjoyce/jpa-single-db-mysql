@@ -1,19 +1,14 @@
 package com.joyce.jpa.config;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -33,51 +28,6 @@ public class DatasourceConfiguration {
 
     @Autowired
     private HibernateProperties hibernateProperties;
-
-    @Value("${datasource.driverClassName}")
-    private String dataSourceDriverClassName;
-
-    @Value("${datasource.jdbcUrl}")
-    private String dataSourceJdbcUrl;
-
-    @Value("${datasource.username}")
-    private String datasourceUsername;
-
-    @Value("${datasource.password}")
-    private String datasourcePassword;
-
-    @Value("${datasource.connectionTestQuery}")
-    private String datasourceConnectionTestQuery;
-
-    @Value("${datasource.maxTotal}")
-    private Integer datasourceMaxTotal;
-
-    @Value("${datasource.maxIdle}")
-    private Integer datasourceMaxIdle;
-
-    @Value("${datasource.minIdle}")
-    private Integer datasourceMinIdle;
-
-    @Value("${datasource.defaultQueryTimeout.seconds}")
-    private Integer datasourceDefaultQueryTimeoutSeconds;
-
-
-    @Bean("dataSource")
-    @ConfigurationProperties("spring.datasource.mysql")
-    public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(dataSourceDriverClassName);
-        dataSource.setUrl(dataSourceJdbcUrl);
-        dataSource.setUsername(datasourceUsername);
-        dataSource.setPassword(datasourcePassword);
-        dataSource.setValidationQuery(datasourceConnectionTestQuery);
-        // connection pool configuration
-        dataSource.setMaxTotal(datasourceMaxTotal);
-        dataSource.setMaxIdle(datasourceMaxIdle);
-        dataSource.setMinIdle(datasourceMinIdle);
-        dataSource.setDefaultQueryTimeout(datasourceDefaultQueryTimeoutSeconds);
-        return dataSource;
-    }
 
     //主库连接工厂
     @Bean("entityManagerFactory")
