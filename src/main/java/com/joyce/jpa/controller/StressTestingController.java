@@ -36,7 +36,7 @@ public class StressTestingController {
     @RequestMapping("/stress-testing/demo/2")
     @ResponseBody
     public Map<String, String> stressTesting2() throws InterruptedException {
-        Thread.sleep(50L);
+        Thread.sleep(5L);
         return map;
     }
 
