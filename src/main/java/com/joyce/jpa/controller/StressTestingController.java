@@ -1,6 +1,6 @@
 package com.joyce.jpa.controller;
 
-import com.joyce.jpa.model.EmployeeModel;
+import com.joyce.jpa.model.UserModel;
 import com.joyce.jpa.service.UserJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,24 +26,35 @@ public class StressTestingController {
         map.put("result", "success");
     }
 
-    @RequestMapping("/stress-testing/demo/1")
+    /*
+    performance compare result:
+    jpa-single-db-mysql . /stress-testing/demo/1
+    VS
+    joyce-webflux-jpa-demo . /jpa/trasaction/demo/1
+     */
+    @RequestMapping("/stress-testing/demo/saveTwoRecords")
     @ResponseBody
-    public Map<String, String> stressTesting1() {
-        userJpaService.stressTesting1();
-        return map;
+    public UserModel saveTwoRecords() {
+        return userJpaService.saveTwoRecords();
     }
 
-    @RequestMapping("/stress-testing/demo/2")
+    @RequestMapping("/stress-testing/demo/saveOneRecord")
     @ResponseBody
-    public Map<String, String> stressTesting2() throws InterruptedException {
-        Thread.sleep(5L);
-        return map;
+    public UserModel saveOneRecord() throws InterruptedException {
+        return userJpaService.saveOneRecord();
     }
 
-    @RequestMapping("/stress-testing/demo/3")
+    @RequestMapping("/stress-testing/demo/saveOneRecordWithNoTransaction")
     @ResponseBody
-    public Map<String, String> stressTesting3() throws InterruptedException {
-        return userJpaService.stressTesting2();
+    public UserModel saveOneRecordWithNoTransaction() {
+        return userJpaService.saveOneRecordWithNoTransaction();
+    }
+
+    @RequestMapping("/stress-testing/demo/sleep-50ms")
+    @ResponseBody
+    public Map<String, String> sleep50ms() throws InterruptedException {
+        Thread.sleep(50L);
+        return map;
     }
 
 }

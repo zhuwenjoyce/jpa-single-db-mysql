@@ -29,12 +29,12 @@ public class UserJpaService {
     private Random random = new Random();
 
     @Transactional // (value = "transactionManager")
-    public void stressTesting1(){
+    public UserModel saveTwoRecords(){
         UserModel user = UserModel.builder()
                 .age(random.nextInt(10))
                 .username(UUID.randomUUID().toString())
                 .birthdayDateTime(ZonedDateTime.now().minusDays(new Random().nextInt(40 * 365 - 1)))
-                .remark("jpa-trasaction-1")
+                .remark("jpa-trasaction-1-1")
                 .createDateTime(ZonedDateTime.now())
                 .build();
         UserModel userModel = userJpaDao.save(user);
@@ -44,21 +44,33 @@ public class UserJpaService {
                 .age(random.nextInt(10))
                 .username(UUID.randomUUID().toString())
                 .birthdayDateTime(ZonedDateTime.now().minusDays(new Random().nextInt(40 * 365 - 1)))
-                .remark("jpa-trasaction-2. user_id=" + id)
+                .remark("jpa-trasaction-1-2. user_id=" + id)
                 .createDateTime(ZonedDateTime.now())
                 .build();
         UserModel userModel2 = userJpaDao.save(user2);
-//        long id2 = userModel2.getUserId();
+        return userModel2;
     }
 
-    public Map<String, String> stressTesting2() {
-        Map<String, String> map = new HashMap<>();
-        map.put("result", "success");
-        try {
-            TimeUnit.MILLISECONDS.sleep(5L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return map;
+    @Transactional
+    public UserModel saveOneRecord() {
+        UserModel user = UserModel.builder()
+                .age(random.nextInt(10))
+                .username(UUID.randomUUID().toString())
+                .birthdayDateTime(ZonedDateTime.now().minusDays(new Random().nextInt(40 * 365 - 1)))
+                .remark("jpa-trasaction-2")
+                .createDateTime(ZonedDateTime.now())
+                .build();
+        return userJpaDao.save(user);
+    }
+
+    public UserModel saveOneRecordWithNoTransaction() {
+        UserModel user = UserModel.builder()
+                .age(random.nextInt(10))
+                .username(UUID.randomUUID().toString())
+                .birthdayDateTime(ZonedDateTime.now().minusDays(new Random().nextInt(40 * 365 - 1)))
+                .remark("jpa-trasaction-3")
+                .createDateTime(ZonedDateTime.now())
+                .build();
+        return userJpaDao.save(user);
     }
 }
