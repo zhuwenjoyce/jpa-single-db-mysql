@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.joyce.jpa</groupId>
 	<artifactId>jpa-single-db-mysql</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>joyce-springboot-jpa-demo</name>
 	<description>jpa + MySQL + single + db</description>
 
@@ -63,10 +63,22 @@
 <!--			<version>2.7.0</version>-->
 <!--		</dependency>-->
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>compile</scope>
+		</dependency>
+
+<!--		for database-->
+<!--		<dependency>-->
+<!--			<groupId>org.apache.commons</groupId>-->
+<!--			<artifactId>commons-dbcp2</artifactId>-->
+<!--			<version>2.7.0</version>-->
+<!--		</dependency>-->
+		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
-
 
 	</dependencies>
 
