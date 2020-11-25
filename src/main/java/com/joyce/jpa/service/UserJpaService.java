@@ -73,4 +73,8 @@ public class UserJpaService {
                 .build();
         return userJpaDao.save(user);
     }
+
+    public UserModel findByUsername(String username) {
+        return userJpaDao.findByUsername(username);
+    }
 }

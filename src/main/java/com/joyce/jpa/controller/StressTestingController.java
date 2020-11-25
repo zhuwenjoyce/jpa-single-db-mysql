@@ -3,6 +3,7 @@ package com.joyce.jpa.controller;
 import com.joyce.jpa.model.UserModel;
 import com.joyce.jpa.service.UserJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,11 @@ public class StressTestingController {
     public Map<String, String> sleep50ms() throws InterruptedException {
         Thread.sleep(50L);
         return map;
+    }
+
+    @RequestMapping("/stress-testing/findByUsername/{username}")
+    public UserModel findByUsername(@PathVariable("username") String username) {
+        return userJpaService.findByUsername(username);
     }
 
 }

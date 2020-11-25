@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserJpaDao extends JpaRepository<UserModel, Long> {
 
+    UserModel findByUsername(String username);
 }
